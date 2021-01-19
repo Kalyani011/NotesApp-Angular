@@ -1,0 +1,59 @@
+<div class="container">
+  <form [formGroup]="composeNoteForm" (ngSubmit)="saveNote()">
+
+    <div class="row">
+      <div class="col-25">
+        <label for="title">Title</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="title" name="title" placeholder="Title..." formControlName="title">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="body">Content</label>
+      </div>
+      <div class="col-75">
+        <textarea id="body" name="body" placeholder="Write something.." rows="5" formControlName="body"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="category">Category</label>
+      </div>
+      <div class="col-75">
+        <select id="category" name="category" formControlName="category">
+          <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="color">Color</label>
+      </div>
+      <div class="col-75">
+        <select id="color" name="color" formControlName="color">
+          <option *ngFor="let color of colorsMap | keyvalue" [ngValue]="color.key">{{color.value}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <div class="col-50">
+          <input type="button" value="Reset" (click)="this.composeNoteForm.reset()">
+        </div>
+
+        <div class="col-50">
+          <input type="submit" value="Save" [disabled]="!composeNoteForm.valid">
+        </div>
+      </div>
+    </div>
+
+</form>
+</div>

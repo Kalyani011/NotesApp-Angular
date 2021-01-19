@@ -1,0 +1,13 @@
+<div class="col-3">
+
+    <div class="note-container" [ngStyle]="{'background-color': note.color ? note.color : '#ffff88'}">
+      <h4>{{ note.title }}</h4>
+      <p>{{note.body.substring(0,100)}}</p>
+      <p>{{note.modifiedDate}}</p>
+      <!-- <button type="button" name="button" class="note-button" (click)="deleteNote()">DELETE</button> -->
+
+      <fa-icon [icon]="faTrashAlt"  class="note-button" (click)="deleteNote()"></fa-icon>
+      <fa-icon [icon]="faEdit"  class="note-button" (click)="editNote()"></fa-icon>
+    </div>
+
+</div>
