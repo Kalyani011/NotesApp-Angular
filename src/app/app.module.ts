@@ -12,6 +12,9 @@ import { NoteComponent } from './components/notes/note/note.component';
 import { ComposeNoteComponent } from './components/compose-note/compose-note.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoteModalComponent } from './components/notes/note-modal/note-modal.component';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { FilterNotesPipe } from './filter-notes.pipe';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { NoteModalComponent } from './components/notes/note-modal/note-modal.com
     NoteComponent,
     ComposeNoteComponent,
     HomeComponent,
-    NoteModalComponent
+    NoteModalComponent,
+    AlertModalComponent,
+    FilterNotesPipe
   ],
   imports: [
     BrowserModule,

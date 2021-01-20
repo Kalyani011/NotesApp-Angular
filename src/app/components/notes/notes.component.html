@@ -1,1 +1,37 @@
-<app-note *ngFor="let note of notes" [thisNote]="note"></app-note>
+<div class="row">
+  <div class="col-12">
+    <div class="input-group filter">
+      <span class="input-group-addon"><fa-icon [icon]="faFilter"></fa-icon></span>
+      <select id="category" name="category" [(ngModel)]="selectedCategory" class="form-control">
+        <option disabled>Category</option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+      </select>
+    </div>
+
+    <div class="input-group filter">
+      <span class="input-group-addon"><fa-icon [icon]="faFilter"></fa-icon></span>
+      <select id="color" name="color" [(ngModel)]="selectedColor" class="form-control" [ngStyle]="{'background-color' : selectedColor}">
+        <option disabled>Color</option>
+        <option *ngFor="let color of colorsMap | keyvalue" [ngValue]="color.key">{{color.value}}</option>
+      </select>
+    </div>
+
+    <!-- <label for="category" class="filter-label">
+      <fa-icon [icon]="faFilter"></fa-icon>
+      <select id="category" name="category" [(ngModel)]="selectedCategory">
+        <option disabled>{{selectedCategory}}</option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+      </select>
+    </label> -->
+
+    <!-- <label for="color" class="filter-label">
+      <fa-icon [icon]="faFilter"></fa-icon>
+      <select id="color" name="color" [(ngModel)]="selectedColor">
+        <option disabled>{{selectedColor}}</option>
+        <option *ngFor="let color of colorsMap | keyvalue" [ngValue]="color.key">{{color.value}}</option>
+      </select>
+    </label> -->
+  </div>
+</div>
+
+<app-note *ngFor="let note of notes | filterNotes:selectedCategory:'category' | filterNotes:selectedColor:'color'" [thisNote]="note"></app-note>

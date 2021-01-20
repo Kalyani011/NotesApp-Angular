@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -14,11 +14,21 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 export class ComposeNoteComponent implements OnInit {
 
+  // Form Group: Original and Current
+  composeNoteForm: FormGroup;
+  originalForm: FormGroup;
+
+  // Edit note
   noteID: number;
   currentNote: Note;
-  composeNoteForm: FormGroup;
-  faChevronCircleLeft = faChevronCircleLeft;
   isEdit: boolean = false;
+
+  // Alert
+  warnUser: boolean = false;
+  warningMessage: string;
+
+  enableReset: boolean = false;
+  faChevronCircleLeft = faChevronCircleLeft;
 
   constructor(
     private notesLocalStorageService: NotesLocalStorageService,
@@ -31,19 +41,27 @@ export class ComposeNoteComponent implements OnInit {
 
     this.route.data.subscribe(data => {
       switch (data.kind) {
+
         case 'add':
           this.composeNoteForm = new FormGroup({
             'title': new FormControl(null),
             'body': new FormControl(null, Validators.required),
             'category': new FormControl(null),
-            'color': new FormControl('#ffff88')
+            'color': new FormControl(null)
           });
+          this.originalForm = Object.assign({}, this.composeNoteForm);
           break;
+
         case 'edit':
           this.isEdit = true;
           this.route.params.subscribe((params: Params) => {
-            this.noteID = parseInt(params['id']);
+            let isValidID = this.notesLocalStorageService.getAllNotes().find((note: Note) => {
+              return note.id == parseInt(params['id']);
+            })
+            isValidID ? this.noteID = parseInt(params['id']) : this.router.navigate(['/']);
           });
+
+
           if (this.noteID !== undefined) {
             this.currentNote = this.notesLocalStorageService.getNote(this.noteID);
             this.composeNoteForm = new FormGroup({
@@ -52,12 +70,24 @@ export class ComposeNoteComponent implements OnInit {
               'category': new FormControl(this.currentNote.category),
               'color': new FormControl(this.currentNote.color)
             });
+            this.originalForm = Object.assign({}, this.composeNoteForm);
           }
           break;
         default:
           break;
       }
     });
+  }
+
+  ngDoCheck() {
+    if(this.composeNoteForm){
+      for (let prop in this.composeNoteForm.value) {
+        if (this.isDifferent(this.composeNoteForm, prop)) {
+          this.enableReset = true;
+          break;
+        }
+      }
+    }
   }
 
   saveNote() {
@@ -89,13 +119,6 @@ export class ComposeNoteComponent implements OnInit {
     }
   }
 
-  // onItemChange(e) {
-  //     console.log(e.target.id);
-  // }
-  // setBackgroundColor(value) {
-  //   console.log(document.getElementById(value).checked);
-  //   return document.getElementById(value).checked ? '#DDD' : '#ffff88';
-  // }
   reset() {
     if (this.isEdit && this.noteID !== undefined && this.currentNote !== undefined) {
       this.composeNoteForm = new FormGroup({
@@ -104,12 +127,46 @@ export class ComposeNoteComponent implements OnInit {
         'category': new FormControl(this.currentNote.category),
         'color': new FormControl(this.currentNote.color)
       });
+      this.originalForm = Object.assign({}, this.composeNoteForm);
+      this.enableReset = false;
     } else {
       this.composeNoteForm.reset();
+      this.originalForm = Object.assign({}, this.composeNoteForm);
+      this.enableReset = false;
     }
   }
 
   goBack() {
-    this._location.back();
+    let hasChanges = false;
+    for (let prop in this.composeNoteForm.value) {
+      if (this.isDifferent(this.composeNoteForm, prop)) { hasChanges = true; break; }
+    }
+    if (hasChanges) {
+      this.warningMessage = "You have unsaved changes, do you want to save the changes?";
+      this.warnUser = true;
+    } else {
+      this._location.back();
+    }
+
+    // if(this.isDifferent(this.composeNoteForm, "body")){
+    //   this.warningMessage = "You have unsaved changes, do you want to save the changes?";
+    //   this.warnUser = true;
+    // }else {
+    //   this._location.back();
+    // }
+
+  }
+
+  onSaveChanges(save) {
+    if (save) {
+      this.warnUser = false;
+    } else {
+      this.reset();
+      this._location.back();
+    }
+  }
+
+  isDifferent(obj: any, prop: string) {
+    return this.originalForm.value[prop] !== obj.value[prop];
   }
 }

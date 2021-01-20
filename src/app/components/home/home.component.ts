@@ -12,7 +12,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  addNote(){
+
+  addNote() {
     this.router.navigate(['/compose']);
   }
+
 }

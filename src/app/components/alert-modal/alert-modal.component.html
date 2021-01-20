@@ -1,0 +1,8 @@
+<div class="backdrop"></div>
+<div class="alert-box">
+  <p>{{ message }}</p>
+  <div class="detail-box-action">
+    <button type="button" name="button" (click)="onCancel()" class="close-button"><fa-icon [icon]="faTimes"></fa-icon></button>
+    <button type="button" name="button" (click)="onOk()" class="ok-button"><fa-icon [icon]="faCheck"></fa-icon></button>    
+  </div>
+</div>

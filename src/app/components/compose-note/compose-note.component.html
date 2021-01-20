@@ -28,8 +28,7 @@
           <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
         </select> -->
         <label for="work"><input type="radio" formControlName="category" value="Work"> Work</label>
-        <label for=""><input type="radio" formControlName="category" value="Home"> Home</label>
-        <label for=""><input type="radio" formControlName="category" value="Official"> Official</label>
+        <label for=""><input type="radio" formControlName="category" value="Personal">Personal</label>
         <label for=""><input type="radio" formControlName="category" value="ToDo"> ToDo</label>
         <label for=""><input type="radio" formControlName="category" value="Other"> Other</label>
       </div>
@@ -45,10 +44,8 @@
         </select> -->
         <label for=""><input type="radio" formControlName="color" value="#ffff88"> Yellow</label>
         <label for=""><input type="radio" formControlName="color" value="#B5D8D6"> Blue</label>
-        <label for=""><input type="radio" formControlName="color" value="#F6E7E0"> Pink</label>
-        <label for=""> <input type="radio" formControlName="color" value="#BFBFBF"> Grey</label>
+        <label for=""><input type="radio" formControlName="color" value="#F6E7E0"> Pink</label>    
         <label for=""> <input type="radio" formControlName="color" value="#FBFAEC"> White</label>
-
       </div>
     </div>
 
@@ -77,24 +74,17 @@
       </ul>
     </div> -->
 
-
     <div class="row form-row">
-
       <div class="col-6">
-        <input type="button" value="Reset" (click)="reset()">
+        <input type="button" value="Reset" (click)="reset()" [disabled]="!enableReset" [ngStyle]="{'background-color': !enableReset ? '#E0E0E0':'#f50e50'}">
       </div>
       <div class="col-6">
         <input type="submit" value="Save" [disabled]="!composeNoteForm.valid">
       </div>
-
     </div>
+
   </form>
-</div>
-
-
-
-
-<div class="row">
   <fa-icon [icon]="faChevronCircleLeft" class="back-button" (click)="goBack()"></fa-icon>
-
 </div>
+
+<app-alert-modal *ngIf="warnUser" [message]="warningMessage" (saveChanges)="onSaveChanges($event)"></app-alert-modal>
