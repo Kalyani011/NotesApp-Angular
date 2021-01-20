@@ -3,3 +3,7 @@ header{
   color: #fff000;
   text-align: left;
 }
+h1{
+  margin-left: 1rem;
+  font-size: 22px;
+}

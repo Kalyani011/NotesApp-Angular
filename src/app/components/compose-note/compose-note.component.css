@@ -1,14 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.form-row {
+  margin: 15px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.compose-note-container {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: 1rem 8rem;
+}
+
+label {
+  float: left;
+  margin: 8px 0;
+  padding: 0 10px;
+}
+
 input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
 }
 
 input[type=button], input[type=submit] {
@@ -19,12 +40,10 @@ input[type=button], input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
-  float: right;
   width: 70%;
-  margin-right: 4vw;
 }
 
-input[type=button],input[type=submit]:hover {
+input[type=button], input[type=submit]:hover {
   background-color: #f50e50;
 }
 
@@ -32,53 +51,65 @@ input[type=submit]:disabled {
   background-color: #E0E0E0;
 }
 
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 60px;
-  margin: 25px 60px;
+.back-button {
+  position: relative;
+  float: right;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 35px;
+  margin: 10px;
+  margin-right: 30px;
+  width: 2rem;
 }
 
-.col-25 {
+/* radio buttons */
+.color-button {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0;
+}
+
+.color-button li {
   float: left;
-  width: 25%;
-  margin-top: 6px;
+  margin: 0 5px 0 0;
+  width: 100px;
+  height: 40px;
+  position: relative;
 }
 
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
+.color-button label {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-.col-50{
-  width: 50%;
-  margin-top: 6px;
+.color-button input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
 }
 
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.color-button input[type="radio"]:checked+label {
+  background: #ffff00;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+.color-button label {
+  padding: 5px;
+  border: 1px solid #CCC;
+  cursor: pointer;
+  z-index: 90;
+}
+
+.color-button label:hover {
+  background: #DDD;
+}
+
 @media screen and (max-width: 600px) {
-  .col-25, .col-75 {
+  .compose-note-container {
     width: 100%;
-    margin-top: 0;
-  }
-
-  input[type=submit] {
-    width: 90%;
-    margin-top: 20px;
-    margin-right: 4.5vw;
-  }
-
-  .container{
-    padding: 20px;
-    margin: 10px;
+    margin: 0 4px;
   }
 }

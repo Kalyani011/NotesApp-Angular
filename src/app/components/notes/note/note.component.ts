@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Note } from "../../../models/note.model";
 import {NotesLocalStorageService} from '../../../notes-local-storage.service';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +17,7 @@ export class NoteComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
 
-  constructor(private notesLocalStorageService : NotesLocalStorageService) { }
+  constructor(private notesLocalStorageService : NotesLocalStorageService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +27,6 @@ export class NoteComponent implements OnInit {
     location.reload();
   }
   editNote(){
-    console.log("going to edit note here");
-
+    this.router.navigate(['/compose', this.note.id]);
   }
 }

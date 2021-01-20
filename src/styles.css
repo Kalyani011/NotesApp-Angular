@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
 }
@@ -9,6 +8,10 @@ html, body{
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   margin: 0;
+}
+
+.row{
+  margin-bottom: 50px;
 }
 .row::after {
   content: "";
@@ -27,7 +30,7 @@ html, body{
 }
 
 @media only screen and (min-width: 600px) {
-  /* For tablets: */
+
   .col-s-1 {width: 8.33%;}
   .col-s-2 {width: 16.66%;}
   .col-s-3 {width: 25%;}
@@ -55,27 +58,4 @@ html, body{
   .col-10 {width: 83.33%;}
   .col-11 {width: 91.66%;}
   .col-12 {width: 100%;}
-}
-
-.add-button {
-  float: right;
-  -webkit-border-radius: 60;
-  -moz-border-radius: 60;
-  border-radius: 60px;
-  -webkit-box-shadow: 1px 1px 3px #666666;
-  -moz-box-shadow: 1px 1px 3px #666666;
-  box-shadow: 1px 1px 3px #666666;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 32px;
-  background: #ff0055;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  border: none;
-  margin-right: 2vw;
-}
-
-.add-button:hover {
-  background: #f50e50;
-  text-decoration: none;
 }

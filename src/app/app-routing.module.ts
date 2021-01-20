@@ -5,7 +5,8 @@ import { ComposeNoteComponent } from './components/compose-note/compose-note.com
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'compose', component: ComposeNoteComponent }
+  { path: 'compose', component: ComposeNoteComponent,  data: { kind: 'add' } },
+  { path: 'compose/:id', component: ComposeNoteComponent,  data: { kind: 'edit' } }
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@ import { Note } from './models/note.model';
 })
 
 export class NotesLocalStorageService {
-  notes : Note[] = [];
+  notes: Note[] = [];
 
   constructor() {
     this.notes = JSON.parse(localStorage.getItem("Notes") || "[]");
@@ -18,29 +18,30 @@ export class NotesLocalStorageService {
     localStorage.setItem("Notes", JSON.stringify(this.notes));
   }
 
-  public getAllNotes(){
+  public editNote(editNote: Note) {
+    let index = this.notes.findIndex((note:Note)=>{
+      return note.id === editNote.id;
+    });
+    this.notes[index] = editNote;    
+    localStorage.setItem("Notes", JSON.stringify(this.notes));
+  }
+
+  public getAllNotes() {
     return JSON.parse(localStorage.getItem("Notes") || "[]");
   }
 
-  public getNote(id : number){
-    // let notes = this.getAllNotes();
-    // let note = notes.find(function (note:Note) {
-    //   return note.id === id;
-    // });
-    // return note;
+  public getNote(id: number) {
+    return (this.notes.find((note: Note) => {
+      return note.id === id;
+    }));
   }
 
-  public deleteNote(id : number){
-    let newNotes = this.notes.filter((note)=>{
+
+  public deleteNote(id: number) {
+    let newNotes = this.notes.filter((note) => {
       return note.id !== id;
     });
-    localStorage.setItem("Notes", JSON.stringify(newNotes));    
+    localStorage.setItem("Notes", JSON.stringify(newNotes));
   }
-  // public removeItem(key:string) {
-  //   localStorage.removeItem(key);
-  // }
-  //
-  // public clear(){
-  //   localStorage.clear();
-  // }
+
 }

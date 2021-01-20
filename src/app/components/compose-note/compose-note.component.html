@@ -1,59 +1,100 @@
-<div class="container">
-  <form [formGroup]="composeNoteForm" (ngSubmit)="saveNote()">
+<div class="row">
+  <form [formGroup]="composeNoteForm" (ngSubmit)="saveNote()" class="compose-note-container">
 
-    <div class="row">
-      <div class="col-25">
+    <div class="row form-row">
+      <div class="">
         <label for="title">Title</label>
       </div>
-      <div class="col-75">
+      <div class="">
         <input type="text" id="title" name="title" placeholder="Title..." formControlName="title">
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-25">
+    <div class="row form-row">
+      <div class="">
         <label for="body">Content</label>
       </div>
-      <div class="col-75">
-        <textarea id="body" name="body" placeholder="Write something.." rows="5" formControlName="body"></textarea>
+      <div class="">
+        <textarea id="body" name="body" placeholder="Take a note..." rows="5" formControlName="body"></textarea>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-25">
-        <label for="category">Category</label>
+    <div class="row form-row">
+      <div class="col-3">
+        <label for="category">Choose a Category:</label>
       </div>
-      <div class="col-75">
-        <select id="category" name="category" formControlName="category">
+      <div class="col-9 align-left">
+        <!-- <select id="category" name="category" formControlName="category">
           <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
-        </select>
+        </select> -->
+        <label for="work"><input type="radio" formControlName="category" value="Work"> Work</label>
+        <label for=""><input type="radio" formControlName="category" value="Home"> Home</label>
+        <label for=""><input type="radio" formControlName="category" value="Official"> Official</label>
+        <label for=""><input type="radio" formControlName="category" value="ToDo"> ToDo</label>
+        <label for=""><input type="radio" formControlName="category" value="Other"> Other</label>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-25">
-        <label for="color">Color</label>
+    <div class="form-row form-row">
+      <div class="col-3">
+        <label for="color">Pick a Color:</label>
       </div>
-      <div class="col-75">
-        <select id="color" name="color" formControlName="color">
+      <div class="col-9 align-left">
+        <!-- <select id="color" name="color" formControlName="color">
           <option *ngFor="let color of colorsMap | keyvalue" [ngValue]="color.key">{{color.value}}</option>
-        </select>
+        </select> -->
+        <label for=""><input type="radio" formControlName="color" value="#ffff88"> Yellow</label>
+        <label for=""><input type="radio" formControlName="color" value="#B5D8D6"> Blue</label>
+        <label for=""><input type="radio" formControlName="color" value="#F6E7E0"> Pink</label>
+        <label for=""> <input type="radio" formControlName="color" value="#BFBFBF"> Grey</label>
+        <label for=""> <input type="radio" formControlName="color" value="#FBFAEC"> White</label>
+
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <div class="col-50">
-          <input type="button" value="Reset" (click)="this.composeNoteForm.reset()">
-        </div>
+    <!-- <div class="row">
+      <ul class="color-button">
+        <li>
+          <input type="radio" id="yellow" name="amount" (change)="onItemChange($event)" />
+          <label for="yellow" [ngStyle]="{'background': '#ffff88'}">Yellow</label>
+        </li>
+        <li>
+          <input type="radio" id="blue" name="amount" (change)="onItemChange($event)"/>
+          <label for="blue" [ngStyle]="{'background':'#B5D8D6'}">Blue</label>
+        </li>
+        <li>
+          <input type="radio" id="pink" name="amount" [checked]="checked" (change)="onItemChange($event)"/>
+          <label for="pink" [ngStyle]="{'background':'#F6E7E0'}">Pink</label>
+        </li>
+        <li>
+          <input type="radio" id="grey" name="amount" (change)="onItemChange($event)"/>
+          <label for="grey" [ngStyle]="{'background':'#BFBFBF'}">Grey</label>
+        </li>
+        <li>
+          <input type="radio" id="white" name="amount" (change)="onItemChange($event)"/>
+          <label for="white" [ngStyle]="{'background':'#FBFAEC'}">White</label>
+        </li>
+      </ul>
+    </div> -->
 
-        <div class="col-50">
-          <input type="submit" value="Save" [disabled]="!composeNoteForm.valid">
-        </div>
+
+    <div class="row form-row">
+
+      <div class="col-6">
+        <input type="button" value="Reset" (click)="reset()">
       </div>
+      <div class="col-6">
+        <input type="submit" value="Save" [disabled]="!composeNoteForm.valid">
+      </div>
+
     </div>
+  </form>
+</div>
 
-</form>
+
+
+
+<div class="row">
+  <fa-icon [icon]="faChevronCircleLeft" class="back-button" (click)="goBack()"></fa-icon>
+
 </div>
