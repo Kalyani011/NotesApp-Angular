@@ -11,6 +11,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { NoteComponent } from './components/notes/note/note.component';
 import { ComposeNoteComponent } from './components/compose-note/compose-note.component';
 import { HomeComponent } from './components/home/home.component';
+import { NoteModalComponent } from './components/notes/note-modal/note-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './components/home/home.component';
     NotesComponent,
     NoteComponent,
     ComposeNoteComponent,
-    HomeComponent
+    HomeComponent,
+    NoteModalComponent
   ],
   imports: [
     BrowserModule,

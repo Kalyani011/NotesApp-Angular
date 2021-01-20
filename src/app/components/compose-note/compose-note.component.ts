@@ -64,6 +64,7 @@ export class ComposeNoteComponent implements OnInit {
     if (this.composeNoteForm.valid) {
 
       if (this.isEdit && this.noteID !== undefined && this.currentNote !== undefined) {
+
         this.notesLocalStorageService.editNote(
           new Note(this.noteID,
             this.composeNoteForm.value.title,
@@ -74,7 +75,7 @@ export class ComposeNoteComponent implements OnInit {
             this.composeNoteForm.value.color)
         );
       } else {
-        let id = this.notesLocalStorageService.getAllNotes().length + 1 || 0;
+        let id = new Date().getTime();
         this.notesLocalStorageService.addNote(
           new Note(id, this.composeNoteForm.value.title,
             this.composeNoteForm.value.body,

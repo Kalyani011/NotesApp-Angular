@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NotesLocalStorageService} from '../../notes-local-storage.service';
-import {Note} from '../../models/note.model';
+import { NotesLocalStorageService } from '../../notes-local-storage.service';
+import { Note } from '../../models/note.model';
 
 @Component({
   selector: 'app-notes',
@@ -9,9 +9,9 @@ import {Note} from '../../models/note.model';
 })
 export class NotesComponent implements OnInit {
 
-  notes : Note[] = [];
+  notes: Note[] = [];
 
-  constructor(private notesLocalStorageService : NotesLocalStorageService) { }
+  constructor(private notesLocalStorageService: NotesLocalStorageService) { }
 
   ngOnInit(): void {
     this.notes = this.notesLocalStorageService.getAllNotes();

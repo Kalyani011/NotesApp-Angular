@@ -22,7 +22,7 @@ export class NotesLocalStorageService {
     let index = this.notes.findIndex((note:Note)=>{
       return note.id === editNote.id;
     });
-    this.notes[index] = editNote;    
+    this.notes[index] = editNote;
     localStorage.setItem("Notes", JSON.stringify(this.notes));
   }
 
@@ -36,12 +36,15 @@ export class NotesLocalStorageService {
     }));
   }
 
-
   public deleteNote(id: number) {
-    let newNotes = this.notes.filter((note) => {
-      return note.id !== id;
+
+    let index = this.notes.findIndex((note:Note)=>{
+      return note.id === id;
     });
-    localStorage.setItem("Notes", JSON.stringify(newNotes));
+    this.notes.splice(index, 1);
+    console.log(this.notes);
+
+    localStorage.setItem("Notes", JSON.stringify(this.notes));
   }
 
 }

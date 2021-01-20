@@ -1,8 +1,18 @@
-<div class="note-container col-3" [ngStyle]="{'background-color': note.color ? note.color : '#ffff88'}">
-  <h4>{{ note.title }}</h4>
-  <p>{{note.body.substring(0,100)}}</p>
-  <p>{{note.modifiedDate}}</p>
-  <!-- <button type="button" name="button" class="note-button" (click)="deleteNote()">DELETE</button> -->
+<div class="note-container col-3" [ngStyle]="{'background-color': note.color ? note.color : '#ffff88'}" >
+
   <fa-icon [icon]="faTrashAlt" class="note-button" (click)="deleteNote()"></fa-icon>
   <fa-icon [icon]="faEdit" class="note-button" (click)="editNote()"></fa-icon>
+  <div (click)="showDetails()">
+    <h4>{{ note.title }}</h4>
+    <p>{{note.body.substring(0,100)}}</p>
+    <p class="modified-date">{{note.modifiedDate}}</p>
+  </div>
+
 </div>
+
+<app-note-modal *ngIf="showNoteDetails" [backgroundColor]="note.color" (close)="closeDetails()">
+  <p>{{ note.category }}</p>
+  <h4>{{ note.title }}</h4>
+  <p>{{ note.body }}</p>
+  <p class="modified-date">{{note.modifiedDate}}</p>
+</app-note-modal>
