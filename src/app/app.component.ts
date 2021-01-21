@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotesLocalStorageService } from './notes-local-storage.service';
+import { NotesLocalStorageService } from './services/notes-local-storage.service';
 
 @Component({
   selector: 'app-root',

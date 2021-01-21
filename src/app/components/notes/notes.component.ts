@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NotesLocalStorageService } from '../../notes-local-storage.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NotesLocalStorageService } from '../../services/notes-local-storage.service';
+import { DeleteNoteService } from '../../services/delete-note.service';
+
 import { Note } from '../../models/note.model';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +11,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
 
   notes: Note[] = [];
   categories: string[] = ["All", "Work", "Personal", "ToDo", "Other"];
@@ -16,13 +19,29 @@ export class NotesComponent implements OnInit {
   selectedCategory: string = "All";
   selectedColor: string = "#ffffff";
   faFilter = faFilter;
+  private deleteSubscription: Subscription;
 
-  constructor(private notesLocalStorageService: NotesLocalStorageService) { }
+  constructor(private notesLocalStorageService: NotesLocalStorageService, private deleteNoteService: DeleteNoteService) { }
 
   ngOnInit(): void {
+
     this.notes = this.notesLocalStorageService.getAllNotes();
+    this.sortNotes();
+
+    this.deleteSubscription = this.deleteNoteService.noteDeletedEmitter.subscribe(updatedNotes => {
+      this.notes = updatedNotes;
+      this.sortNotes();
+    });
+
+  }
+
+  sortNotes(): void {
     this.notes.sort((a, b) => {
       return (new Date(b.modifiedDate).getTime()) - (new Date(a.modifiedDate).getTime())
     });
+  }
+
+  ngOnDestroy(): void {
+    this.deleteSubscription.unsubscribe();
   }
 }

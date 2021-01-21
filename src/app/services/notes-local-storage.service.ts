@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Note } from './models/note.model';
+import { Note } from '../models/note.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,7 @@ export class NotesLocalStorageService {
     this.notes.splice(index, 1);
 
     localStorage.setItem("Notes", JSON.stringify(this.notes));
+    return this.getAllNotes();
   }
 
 }

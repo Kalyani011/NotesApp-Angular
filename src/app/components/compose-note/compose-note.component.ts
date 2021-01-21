@@ -2,7 +2,9 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { NotesLocalStorageService } from '../../notes-local-storage.service';
+
+import { NotesLocalStorageService } from '../../services/notes-local-storage.service';
+
 import { Note } from '../../models/note.model';
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
@@ -118,9 +120,7 @@ export class ComposeNoteComponent implements OnInit {
             this.composeNoteForm.value.color)
         );
       }
-      this.toastr.success('Note Saved Successfully', "", {
-        timeOut: 1000,
-      });
+      this.toastr.success('Note Saved Successfully');
       this.router.navigate(['/']);
     }
   }
@@ -167,7 +167,9 @@ export class ComposeNoteComponent implements OnInit {
           this.saveNote();
         } else {
           this.warnUser = false;
-          this.toastr.error("Please Enter Note Content to Save the Note!", "");
+          this.toastr.error("Please Enter Note Content to Save the Note!", "", {
+            timeOut: 5000,
+          });
         }
       } else {
         this.warnUser = false;
