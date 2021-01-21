@@ -14,6 +14,7 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export class NoteComponent implements OnInit {
   @Input('thisNote') note: Note;
+  
   showNoteDetails: boolean = false;
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
@@ -25,7 +26,7 @@ export class NoteComponent implements OnInit {
 
   deleteNote() {
     this.notesLocalStorageService.deleteNote(this.note.id);
-    location.reload();
+    //location.reload();
   }
   editNote() {
     this.router.navigate(['/compose', this.note.id]);

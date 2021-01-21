@@ -42,7 +42,6 @@ export class NotesLocalStorageService {
       return note.id === id;
     });
     this.notes.splice(index, 1);
-    console.log(this.notes);
 
     localStorage.setItem("Notes", JSON.stringify(this.notes));
   }
