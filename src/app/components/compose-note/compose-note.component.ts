@@ -105,7 +105,7 @@ export class ComposeNoteComponent implements OnInit {
             this.composeNoteForm.value.title,
             this.composeNoteForm.value.body,
             this.currentNote.createdDate,
-            new Date().toLocaleString(),
+            new Date(),
             this.composeNoteForm.value.category,
             this.composeNoteForm.value.color)
         );
@@ -114,8 +114,8 @@ export class ComposeNoteComponent implements OnInit {
         this.notesLocalStorageService.addNote(
           new Note(id, this.composeNoteForm.value.title,
             this.composeNoteForm.value.body,
-            new Date().toLocaleString(),
-            new Date().toLocaleString(),
+            new Date(),
+            new Date(),
             this.composeNoteForm.value.category,
             this.composeNoteForm.value.color)
         );

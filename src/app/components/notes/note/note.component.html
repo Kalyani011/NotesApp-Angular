@@ -3,8 +3,8 @@
   <fa-icon [icon]="faEdit" class="note-button" (click)="editNote()"></fa-icon>
   <p class="category">{{ note.category }}</p>
   <h4>{{ note.title }}</h4>
-  <p>{{ note.body.length > 100 ? note.body.substring(0,100) + " ..." : note.body}}</p>
-  <p class="modified-date">{{note.modifiedDate}}</p>
+  <p>{{(note.body.length>100)? (note.body | slice:0:100)+'...':(note.body)}}</p>
+  <p class="modified-date">{{note.modifiedDate | date: "h:mm on MMMM d, y"}}</p>
 </div>
 
 <app-note-modal *ngIf="showNoteDetails" [backgroundColor]="note.color" (close)="closeDetails()">

@@ -22,4 +22,4 @@
   </div>
 </div>
 
-<app-note *ngFor="let note of notes | filterNotes:selectedCategory:'category' | filterNotes:selectedColor:'color'" [thisNote]="note"></app-note>
+<app-note *ngFor="let note of notes | filterNotes:selectedCategory:'category' | filterNotes:selectedColor:'color'" [thisNote]="note" (noteDeleted)="handleNoteDelete($event)"></app-note>

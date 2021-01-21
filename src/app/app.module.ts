@@ -39,10 +39,10 @@ import { FilterNotesPipe } from './filter-notes.pipe';
     FontAwesomeModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-    timeOut: 1000,
-    positionClass: 'toast-bottom-right',
-    preventDuplicates: true,
-  })
+      timeOut: 1000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
