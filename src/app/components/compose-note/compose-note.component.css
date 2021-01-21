@@ -109,6 +109,10 @@ input[type=submit]:disabled {
   background: #DDD;
 }
 
+.red-star{
+  color:#ff0000;
+}
+
 @media screen and (max-width: 600px) {
   .compose-note-container {
     width: 100%;

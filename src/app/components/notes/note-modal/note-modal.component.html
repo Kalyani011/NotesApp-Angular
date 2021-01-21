@@ -1,5 +1,5 @@
 <div class="backdrop" (click)="onClose()"></div>
-<div class="detail-box" [ngStyle]="{'background-color':backgroundColor}">
+<div class="detail-box" [ngStyle]="{'background-color':backgroundColor ? backgroundColor : '#ffff88'}">
   <ng-content></ng-content>
   <div class="detail-box-action">
     <button type="button" name="button" (click)="onClose()" class="close-button">  <fa-icon [icon]="faTimes"></fa-icon></button>

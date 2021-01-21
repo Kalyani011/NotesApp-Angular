@@ -18,8 +18,6 @@ export class NoteModalComponent implements OnInit {
   }
 
   onClose() {
-    console.log("we are here");
-
     this.close.emit(false);
   }
 }

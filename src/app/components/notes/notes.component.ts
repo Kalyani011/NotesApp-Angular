@@ -13,8 +13,8 @@ export class NotesComponent implements OnInit {
   notes: Note[] = [];
   categories: string[] = ["All", "Work", "Personal", "ToDo", "Other"];
   colorsMap = new Map([["#ffffff", "All"], ["#ffff88", "Yellow"], ["#B5D8D6", "Blue"], ["#F6E7E0", "Pink"], ["#FBFAEC", "White"]]);
-  selectedCategory: string = "Category";
-  selectedColor: string = "Color";
+  selectedCategory: string = "All";
+  selectedColor: string = "#ffffff";
   faFilter = faFilter;
 
   constructor(private notesLocalStorageService: NotesLocalStorageService) { }
@@ -25,5 +25,4 @@ export class NotesComponent implements OnInit {
       return (new Date(b.modifiedDate).getTime()) - (new Date(a.modifiedDate).getTime())
     });
   }
-
 }
