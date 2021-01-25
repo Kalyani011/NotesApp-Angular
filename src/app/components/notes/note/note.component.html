@@ -11,5 +11,5 @@
   <p>{{ note.category }}</p>
   <h4>{{ note.title }}</h4>
   <p>{{ note.body }}</p>
-  <p class="modified-date">{{note.modifiedDate}}</p>
+  <p class="modified-date">{{note.modifiedDate | date: "h:mm on MMMM d, y"}}</p>
 </app-note-modal>
