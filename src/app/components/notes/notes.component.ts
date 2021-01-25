@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs';
+// import { Subscription } from 'rxjs';
 import { NotesLocalStorageService } from '../../services/notes-local-storage.service';
 
 import { Note } from '../../models/note.model';
@@ -10,7 +10,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css']
 })
-export class NotesComponent implements OnInit, OnDestroy {
+export class NotesComponent implements OnInit {
 
   notes: Note[] = [];
   categories: string[] = ["All", "Work", "Personal", "ToDo", "Other"];
@@ -18,7 +18,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   selectedCategory: string = "All";
   selectedColor: string = "#ffffff";
   faFilter = faFilter;
-  private deleteSubscription: Subscription;
+  // private deleteSubscription: Subscription;
   // noteDeletedEmitter = new EventEmitter<Note[]>();
 
 
@@ -48,7 +48,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    // this.deleteSubscription.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   // this.deleteSubscription.unsubscribe();
+  // }
 }
