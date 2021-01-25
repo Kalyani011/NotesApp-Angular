@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 // import { Subscription } from 'rxjs';
 import { NotesLocalStorageService } from '../../services/notes-local-storage.service';
 
@@ -21,24 +21,20 @@ export class NotesComponent implements OnInit {
   // private deleteSubscription: Subscription;
   // noteDeletedEmitter = new EventEmitter<Note[]>();
 
-
   constructor(private notesLocalStorageService: NotesLocalStorageService) { }
 
   ngOnInit(): void {
-
     this.notes = this.notesLocalStorageService.getAllNotes();
     this.sortNotes();
-
     // this.deleteSubscription = this.noteDeletedEmitter.subscribe(updatedNotes => {
     //   this.notes = updatedNotes;
     //   this.sortNotes();
     // });
-
   }
 
-  handleNoteDelete(notes){
+  handleNoteDelete(id:number){
     // this.noteDeletedEmitter.emit(notes);
-    this.notes = notes;
+    this.notes = this.notesLocalStorageService.deleteNote(id);
     this.sortNotes();
   }
 
@@ -48,7 +44,4 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  // ngOnDestroy(): void {
-  //   // this.deleteSubscription.unsubscribe();
-  // }
 }

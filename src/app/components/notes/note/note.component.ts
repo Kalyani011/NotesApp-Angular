@@ -1,12 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
-import { Note } from "../../../models/note.model";
-import { NotesLocalStorageService } from '../../../services/notes-local-storage.service';
-
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
+import { Note } from "../../../models/note.model";
 
 @Component({
   selector: 'app-note',
@@ -16,14 +13,13 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export class NoteComponent implements OnInit {
   @Input('thisNote') note: Note;
-  @Output() noteDeleted = new EventEmitter<Note[]>();
+  @Output() noteDeleted = new EventEmitter<number>();
 
   showNoteDetails: boolean = false;
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
 
   constructor(
-    private notesLocalStorageService: NotesLocalStorageService,
     private router: Router,
     private toastr: ToastrService
   ) { }
@@ -32,8 +28,7 @@ export class NoteComponent implements OnInit {
   }
 
   deleteNote() {
-    let currentNotes = this.notesLocalStorageService.deleteNote(this.note.id);
-    this.noteDeleted.emit(currentNotes);
+    this.noteDeleted.emit(this.note.id);
     this.toastr.success('Note Deleted Successfully');
   }
 
