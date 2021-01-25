@@ -52,7 +52,6 @@ input[type=submit]:disabled {
   background-color: #E0E0E0;
 }
 
-
 .back-button {
   position: relative;
   float: right;
@@ -109,8 +108,8 @@ input[type=submit]:disabled {
   background: #DDD;
 }
 
-.red-star{
-  color:#ff0000;
+.red-star {
+  color: #ff0000;
 }
 
 @media screen and (max-width: 600px) {

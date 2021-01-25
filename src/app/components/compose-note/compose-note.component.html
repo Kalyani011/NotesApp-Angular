@@ -76,14 +76,14 @@
 
     <div class="row form-row">
       <div class="col-6">
-        <input type="button" value="Reset" (click)="reset()" [disabled]="!enableReset" [ngStyle]="{'background-color': !enableReset ? '#E0E0E0':'#f50e50'}">
+        <input type="button" value="Reset" (click)="reset()" [disabled]="!composeNoteForm.dirty" [ngStyle]="{'background-color': !composeNoteForm.dirty ? '#E0E0E0':'#f50e50'}">
       </div>
       <div class="col-6">
         <input type="submit" value="Save" [disabled]="!composeNoteForm.valid">
       </div>
     </div>
-
   </form>
+
   <fa-icon [icon]="faChevronCircleLeft" class="back-button" (click)="goBack()"></fa-icon>
 </div>
 

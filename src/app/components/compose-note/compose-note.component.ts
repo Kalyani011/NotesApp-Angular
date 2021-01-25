@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -32,7 +32,6 @@ export class ComposeNoteComponent implements OnInit {
   warningMessage: string;
 
   hasChanges: boolean = false;
-  enableReset: boolean = false;
   faChevronCircleLeft = faChevronCircleLeft;
 
   constructor(
@@ -84,16 +83,6 @@ export class ComposeNoteComponent implements OnInit {
     });
   }
 
-  ngDoCheck() {
-    if (this.composeNoteForm) {
-      for (let prop in this.composeNoteForm.value) {
-        if (this.isDifferent(this.composeNoteForm, prop)) {
-          this.enableReset = true;
-          break;
-        }
-      }
-    }
-  }
 
   saveNote() {
     if (this.composeNoteForm.valid) {
@@ -134,7 +123,6 @@ export class ComposeNoteComponent implements OnInit {
         'color': new FormControl(this.currentNote.color)
       });
       this.originalForm = Object.assign({}, this.composeNoteForm);
-      this.enableReset = false;
     } else {
       this.composeNoteForm = new FormGroup({
         'title': new FormControl(null),
@@ -143,12 +131,11 @@ export class ComposeNoteComponent implements OnInit {
         'color': new FormControl("#ffff88")
       });
       this.originalForm = Object.assign({}, this.composeNoteForm);
-      this.enableReset = false;
     }
   }
 
   goBack() {
-    // let hasChanges = false;
+
     for (let prop in this.composeNoteForm.value) {
       if (this.isDifferent(this.composeNoteForm, prop)) { this.hasChanges = true; break; }
     }
@@ -183,4 +170,12 @@ export class ComposeNoteComponent implements OnInit {
   isDifferent(obj: any, prop: string) {
     return this.originalForm.value[prop] !== obj.value[prop];
   }
+
+  // isFormTouched() {
+  //   if (this.composeNoteForm.get('title').touched || this.composeNoteForm.get('body').touched || this.composeNoteForm.touched) {
+  //     this.enableReset = true;
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }
